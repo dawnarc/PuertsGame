@@ -67,7 +67,6 @@ class TS_Player extends UE.Character
     
     Shoot(axisValue: number): void 
     {
-
         this.AShoot(axisValue)
     }
 

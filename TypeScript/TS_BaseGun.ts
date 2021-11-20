@@ -28,7 +28,6 @@ class TS_BaseGun extends UE.Actor
             {
                 UE.GameplayStatics.ApplyDamage(hitResult.Actor, this.Damage, undefined, undefined, undefined);
             }
-            
         }
     }
 }
