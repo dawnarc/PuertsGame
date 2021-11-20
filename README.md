@@ -1,7 +1,7 @@
 ### Summary
 
-`PuerTS` is a high performance script system for Unity and Unreal.  
-This's personal study notes reference to official tutorial.
+[PuerTS](https://github.com/Tencent/puerts) is a high performance script system for Unity and Unreal that founded by [chexiongsheng](https://github.com/chexiongsheng).  
+This's personal study notes reference to author's tutorial, since there're some issues don't mention in origin documents.
 
 Official tutorial:
 跟我用TypeScript做一个FPS游戏  
