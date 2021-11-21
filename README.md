@@ -28,3 +28,19 @@ If add a blank line and save file, log would output that TypeScript source has b
 ![screenshoots05](./docs/screenshoots/screenshoot_5.png)  
 Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal `.uasset` file under directory `PuertsGame/Blueprints/TypeScript/`.  
 
+### Debug in IntelliJ IDEA
+
++ UE4Editor -> Edit -> Project Settings -> Plugins -> Puerts Settings -> Enable `Debug Mode`, and set `Debug Port` as an unused occupied port.  
+![screenshoots06](./docs/screenshoots/screenshoot_6.png)
++ IntelliJ IDEA -> Run -> Edit Configurations  
+![screenshoots07](./docs/screenshoots/screenshoot_7.png)
++ Add New Configuration -> Attach to Node.js / Chrome  
+![screenshoots08](./docs/screenshoots/screenshoot_8.png)
++ Set `Port` as the same as UE4Editor settings (`8080`)  
+![screenshoots09](./docs/screenshoots/screenshoot_9.png)
++ Re-startup UE4Editor at first time.
++ Debug TypeScript in IntelliJ IDEA:  
+![screenshoots10](./docs/screenshoots/screenshoot_10.png)
++ Play game in UE4Editor.
++ Then brackpoints in IntelliJ IDEA would be hit:  
+![screenshoots11](./docs/screenshoots/screenshoot_11.png)
