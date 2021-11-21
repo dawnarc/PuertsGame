@@ -42,5 +42,5 @@ Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal
 + Debug TypeScript in IntelliJ IDEA:  
 ![screenshoots10](./docs/screenshoots/screenshoot_10.png)
 + Play game in UE4Editor.
-+ Then breakpoints in IntelliJ IDEA would be hit:  
++ Then breakpoints in IntelliJ IDEA would be hit, and you can watch variables values:  
 ![screenshoots11](./docs/screenshoots/screenshoot_11.png)
