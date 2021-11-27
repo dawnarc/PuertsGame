@@ -11,6 +11,8 @@ https://zhuanlan.zhihu.com/p/346531865
 Showcase  
 ![screenshoots01](./docs/screenshoots/screenshoot_1.gif)
 
+***
+
 ### Setup
 
 + Install Unreal Engine 4.
@@ -27,6 +29,8 @@ You need to edit these TypeScript source file to fire hot swapping of `PuerTS` b
 If add a blank line and save file, log would output that TypeScript source has been re-compiled:  
 ![screenshoots05](./docs/screenshoots/screenshoot_5.png)  
 Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal `.uasset` file under directory `PuertsGame/Blueprints/TypeScript/`.  
+
+***
 
 ### Debug in IntelliJ IDEA
 
