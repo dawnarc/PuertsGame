@@ -1,3 +1,9 @@
+# Branches Introduction
+
++ `main`: the newest content of this example.
++ `rpc`: implement shooting and `RPC` logic.
++ `shooting`: implement basic shooting logic only.
+
 # Summary
 
 [PuerTS](https://github.com/Tencent/puerts) is a high performance script system for Unity and Unreal that founded by [chexiongsheng](https://github.com/chexiongsheng).
