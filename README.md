@@ -29,6 +29,8 @@ You need to edit these TypeScript source file to fire hot swapping of `PuerTS` b
 If add a blank line and save file, log would output that TypeScript source has been re-compiled:  
 ![screenshoots05](./docs/screenshoots/screenshoot_5.png)  
 Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal `.uasset` file under directory `PuertsGame/Blueprints/TypeScript/`.  
++ Set `GameMode` and `Default Pawn Class` in Sorld Settings panel:  
+![screenshoots05](./docs/screenshoots/screenshoot_5-1.png)  
 
 ***
 
