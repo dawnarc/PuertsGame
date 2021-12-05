@@ -1,4 +1,4 @@
-### Summary
+# Summary
 
 [PuerTS](https://github.com/Tencent/puerts) is a high performance script system for Unity and Unreal that founded by [chexiongsheng](https://github.com/chexiongsheng).
 
@@ -13,7 +13,7 @@ Showcase
 
 ***
 
-### Setup
+# Setup
 
 + Install Unreal Engine 4.
 + Install nodejs: https://nodejs.org/en/download/
@@ -34,7 +34,7 @@ Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal
 
 ***
 
-### Debug in IntelliJ IDEA
+# Debug in IntelliJ IDEA
 
 + UE4Editor -> Edit -> Project Settings -> Plugins -> Puerts Settings -> Enable `Debug Mode`, and set `Debug Port` as an unused occupied port.  
 ![screenshoots06](./docs/screenshoots/screenshoot_6.png)
