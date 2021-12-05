@@ -3,6 +3,7 @@ import * as UE from 'ue'
 import TS_BaseGun from './TS_BaseGun'
 import {$ref, $unref} from 'puerts'
 import './ObjectExt' 
+import {rpc, edit_on_instance} from 'ue'
 
 function delay(t:number) {
     return new Promise(function(resolve) { 
@@ -17,8 +18,16 @@ class TS_Player extends UE.Character
     GunLocation:UE.SceneComponent;
     CanShoot: boolean;
 
+    @rpc.flags(rpc.PropertyFlags.CPF_Net | rpc.PropertyFlags.CPF_RepNotify)
+    @rpc.condition(rpc.ELifetimeCondition.COND_InitialOrOwner)
+    ShootCounter: number;
+
     Constructor() 
     {
+        this.bUseControllerRotationPitch = true;
+        this.bUseControllerRotationYaw = true;
+        this.bUseControllerRotationRoll = true;
+
         let FpsCamera = this.CreateDefaultSubobjectGeneric<UE.CameraComponent>("FpsCamera", UE.CameraComponent.StaticClass());
         FpsCamera.SetupAttachment(this.CapsuleComponent, "FpsCamera");
         FpsCamera.K2_SetRelativeLocationAndRotation(new UE.Vector(0, 0, 90), undefined, false, $ref<UE.HitResult>(undefined), false);
@@ -53,9 +62,13 @@ class TS_Player extends UE.Character
     }
 
     //@no-blueprint
-    async AShoot(axisValue: number): Promise<void> {
+    async AsynClientShoot(axisValue: number): Promise<void> {
         //console.log("=========== aaaaaa ", axisValue);
         if (axisValue == 1 && this.CanShoot) {
+            //notify server to process shoot logic.
+            this.ServerShoot();
+
+            //client local shoot logic.
             let cameraLocation = this.FpsCamera.K2_GetComponentLocation();
             let endLocation = cameraLocation.op_Addition(this.FpsCamera.GetForwardVector().op_Multiply(this.EquippedGun.MaxBulletDistance));
             this.EquippedGun.Shoot(cameraLocation, endLocation);
@@ -67,7 +80,27 @@ class TS_Player extends UE.Character
     
     Shoot(axisValue: number): void 
     {
-        this.AShoot(axisValue)
+        this.AsynClientShoot(axisValue);
+    }
+
+    //@no-blueprint
+    async ServerAsyncShoot(): Promise<void> {
+        //console.log("=========== aaaaaa ", axisValue);
+        if (this.CanShoot) {
+            let cameraLocation = this.FpsCamera.K2_GetComponentLocation();
+            let endLocation = cameraLocation.op_Addition(this.FpsCamera.GetForwardVector().op_Multiply(this.EquippedGun.MaxBulletDistance));
+            this.EquippedGun.Shoot(cameraLocation, endLocation);
+            this.CanShoot = false;
+            await delay(this.EquippedGun.FireRate * 1000);//TODO: 支持Latent方法转async方法后，可以用KismetSystemLibrary.Delay
+            this.CanShoot = true;
+        }
+    }
+
+    @rpc.flags(rpc.FunctionFlags.FUNC_Net | rpc.FunctionFlags.FUNC_NetServer | rpc.FunctionFlags.FUNC_NetReliable)
+    ServerShoot(): void {
+        let IsServer = UE.KismetSystemLibrary.IsDedicatedServer(this);
+        //console.log("======= ServerShoot", IsServer);
+        this.ServerAsyncShoot();
     }
 
     ReceiveBeginPlay(): void 
