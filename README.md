@@ -123,16 +123,16 @@ Project Settings -> Packaging -> Additional Non-Asset Directories To Copy -> Add
 
 Otherwise, you would get error on startup:
 
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/first_run.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/polyfill.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/log.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/modular.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/uelazyload.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/events.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/promises.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/argv.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/jit_stub.js]
-    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/hot_reload.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/first_run.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/polyfill.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/log.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/modular.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/uelazyload.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/events.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/promises.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/argv.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/jit_stub.js]
+    Puerts: Error: (0x00000228FF6B3BF0) can not find [puerts/hot_reload.js]
 
 ## Issues 2
 
