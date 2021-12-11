@@ -10,7 +10,8 @@ class TS_BaseGun extends UE.Actor
     PS_BulletImpact: UE.ParticleSystem;
 
     Constructor() {
-        this.PS_BulletImpact = UE.ParticleSystem.Load("/Game/BlockBreaker/ParticleSystems/PS_BulletImpact");
+        //warning: Load asset in constructor would cause crash in packaged application, only works in editor.
+        //this.PS_BulletImpact = UE.ParticleSystem.Load("/Game/BlockBreaker/ParticleSystems/PS_BulletImpact");
     }
     
     //@no-blueprint
@@ -29,10 +30,16 @@ class TS_BaseGun extends UE.Actor
 
             if (hitResult.Actor) 
             {
-                console.log("======= ApplyDamage", IsServer);
+                //console.log("======= ApplyDamage", IsServer);
                 UE.GameplayStatics.ApplyDamage(hitResult.Actor, this.Damage, undefined, undefined, undefined);
             }
         }
+    }
+
+    ReceiveBeginPlay(): void
+    {
+        console.log("+++++ BaseGun beginplay");
+        this.PS_BulletImpact = UE.ParticleSystem.Load("/Game/BlockBreaker/ParticleSystems/PS_BulletImpact");
     }
 }
 

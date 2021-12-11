@@ -12,8 +12,16 @@ class TS_Rifle extends TS_BaseGun
         this.FireRate = 0.1;
         
         this.GunMesh = this.CreateDefaultSubobjectGeneric<UE.StaticMeshComponent>("GunMesh", UE.StaticMeshComponent.StaticClass());
-        this.GunMesh.StaticMesh = UE.StaticMesh.Load("/Game/BlockBreaker/Meshes/SM_Rifle");
+        //warning: Load asset in constructor would cause crash in packaged application, only works in editor.
+        //this.GunMesh.StaticMesh = UE.StaticMesh.Load("/Game/BlockBreaker/Meshes/SM_Rifle");
         this.RootComponent = this.GunMesh;
+    }
+
+    ReceiveBeginPlay(): void
+    {
+        console.log("==== Refile beginplay")
+        super.ReceiveBeginPlay();
+        this.GunMesh.StaticMesh = UE.StaticMesh.Load("/Game/BlockBreaker/Meshes/SM_Rifle");
     }
 }
 

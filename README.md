@@ -64,6 +64,30 @@ Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal
 
 # RPC
 
+To enable RPC, add `"experimentalDecorators": true` in `PuertsGame/tsconfig.json`:
+
+    {
+        "compilerOptions": {
+            "target": "esnext",
+            "module": "commonjs",
+            "experimentalDecorators": true,
+            "jsx": "react",
+            "sourceMap": true,
+            "typeRoots": [
+                "Plugins/Puerts/Typing",
+                "./node_modules/@types"
+            ],
+            "outDir": "Content/JavaScript"
+        },
+        "include": [
+            "TypeScript/**/*"
+        ]
+    }
+
+Otherwise you would get warning:
+
+    Error D:/PuertsGame/TypeScript/TS_Player.ts (101,5): Experimental support for decorators is a feature that is subject to change in a future release. Set the 'experimentalDecorators' option to remove this warning.
+
 Open `BP_Target`.  
 ![screenshoots11](./docs/screenshoots/screenshoot_12.png)
 
@@ -88,3 +112,43 @@ Select `Net Mode` of `Multiplayer Options` as `Play as Client`.
 ![screenshoots11](./docs/screenshoots/screenshoot_19.png)
 
 Now you can run game with RPC demonstration.
+
+# Package
+
+## Issues 1
+
+Project Settings -> Packaging -> Additional Non-Asset Directories To Copy -> Add directory `JavaScript`.
+
+![screenshoots11](./docs/screenshoots/screenshoot_20.png)
+
+Otherwise, you would get error on startup:
+
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/first_run.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/polyfill.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/log.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/modular.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/uelazyload.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/events.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/promises.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/argv.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/jit_stub.js]
+    Puerts: Error: (0x00000228FF6B3BF0) AAA can not find [puerts/hot_reload.js]
+
+## Issues 2
+
+Don't load object in Constructor since there are some limits in Unreal.
+
+    Constructor() 
+    {
+        this.PS_BulletImpact = UE.ParticleSystem.Load("/Game/BlockBreaker/ParticleSystems/PS_BulletImpact");
+    }
+Otherwise, you would get error on startup:
+
+    Assertion failed: AsyncLoadingThread.RecursionNotAllowed.Increment() == 1 [File:D:/Build/++UE4/Sync/Engine/Source/Runtime/CoreUObject/Private/Serialization/AsyncLoading.cpp] [Line: 3992] 
+
+Alteration: load object in `ReceiveBeginPlay`:
+
+    ReceiveBeginPlay(): void
+    {
+        this.PS_BulletImpact = UE.ParticleSystem.Load("/Game/BlockBreaker/ParticleSystems/PS_BulletImpact");
+    }
