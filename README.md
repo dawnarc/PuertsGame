@@ -45,7 +45,7 @@ Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal
 
 # Debug in IntelliJ IDEA
 
-+ UE4Editor -> Edit -> Project Settings -> Plugins -> Puerts Settings -> Enable `Debug Mode`, and set `Debug Port` as an unused occupied port.  
++ UE4Editor -> Edit -> Project Settings -> Plugins -> Puerts Settings -> Enable `Debug Mode`, and set `Debug Port` as an unoccupied port (`8889` recommended).  
 ![screenshoots06](./docs/screenshoots/screenshoot_6.png)
 + IntelliJ IDEA -> Run -> Edit Configurations  
 ![screenshoots07](./docs/screenshoots/screenshoot_7.png)
