@@ -51,7 +51,7 @@ Then `PuerTS` would auto compile this TypeScript source and auto generate Unreal
 ![screenshoots07](./docs/screenshoots/screenshoot_7.png)
 + Add New Configuration -> Attach to Node.js / Chrome  
 ![screenshoots08](./docs/screenshoots/screenshoot_8.png)
-+ Set `Port` as the same as UE4Editor settings (`8080`)  
++ Set `Port` as the same as UE4Editor settings (`8889`)  
 ![screenshoots09](./docs/screenshoots/screenshoot_9.png)
 + Re-startup UE4Editor at first time.
 + Debug TypeScript in IntelliJ IDEA:  
