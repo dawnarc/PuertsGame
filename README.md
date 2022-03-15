@@ -22,7 +22,9 @@ Showcase
 # Setup
 
 + Install Unreal Engine 4.
-+ Install nodejs: https://nodejs.org/en/download/
++ Install nodejs: https://nodejs.org/en/download/  
+Check the option `Automatically install the necessary tools.` at the ending of installation.
+![screenshoots02](./docs/screenshoots/screenshoot_1_2.png)
 + Clone puerts from https://github.com/Tencent/puerts
 + Copy directory `puerts/unreal/Puerts/` into this project:`PuertsGame/Plugins/Puerts/`.
 + Open cmd and address to directory `PuertsGame/Plugins/Puerts/`, execute command:
