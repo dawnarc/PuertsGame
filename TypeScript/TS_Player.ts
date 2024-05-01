@@ -1,8 +1,10 @@
 
 import * as UE from 'ue'
-import TS_BaseGun from './TS_BaseGun'
 import {$ref, $unref} from 'puerts'
-import './ObjectExt' 
+import {uproperty} from 'ue'
+
+import TS_BaseGun from './TS_BaseGun'
+import './ObjectExt'
 
 function delay(t:number) {
     return new Promise(function(resolve) { 
@@ -14,22 +16,16 @@ class TS_Player extends UE.Character
 {
     FpsCamera: UE.CameraComponent;
     EquippedGun:TS_BaseGun;
+    @uproperty.attach("FpsCamera")
     GunLocation:UE.SceneComponent;
     CanShoot: boolean;
 
     Constructor() 
     {
-        let FpsCamera = this.CreateDefaultSubobjectGeneric<UE.CameraComponent>("FpsCamera", UE.CameraComponent.StaticClass());
-        FpsCamera.SetupAttachment(this.CapsuleComponent, "FpsCamera");
-        FpsCamera.K2_SetRelativeLocationAndRotation(new UE.Vector(0, 0, 90), undefined, false, $ref<UE.HitResult>(undefined), false);
-        FpsCamera.bUsePawnControlRotation = true;
-        this.FpsCamera = FpsCamera;
-
-        this.GunLocation = this.CreateDefaultSubobjectGeneric<UE.SceneComponent>("GunLocation", UE.SceneComponent.StaticClass());
-        this.GunLocation.SetupAttachment(this.FpsCamera, "GunLocation");
-        this.GunLocation.K2_SetRelativeLocationAndRotation(new UE.Vector(30, 14, -12), new UE.Rotator(0, 95, 0), false, $ref<UE.HitResult>(undefined), false);
-
         this.CanShoot = true;
+
+        this.bUseControllerRotationYaw = true;
+        this.bUseControllerRotationPitch = true;
     }
 
     MoveForward(axisValue: number): void 
@@ -72,9 +68,15 @@ class TS_Player extends UE.Character
 
     ReceiveBeginPlay(): void 
     {
+        this.FpsCamera.K2_SetRelativeLocationAndRotation(new UE.Vector(0, 0, 90), undefined, false, $ref<UE.HitResult>(undefined), false);
+        this.FpsCamera.bUsePawnControlRotation = true;
+
+        this.GunLocation.K2_SetRelativeLocationAndRotation(new UE.Vector(30, 14, -12), new UE.Rotator(0, 95, 0), false, $ref<UE.HitResult>(undefined), false);
+
         let ucls  = UE.Class.Load("/Game/Blueprints/TypeScript/TS_Rifle.TS_Rifle_C");
         this.EquippedGun = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(this, ucls, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, this) as TS_BaseGun;
         UE.GameplayStatics.FinishSpawningActor(this.EquippedGun, undefined);
+
         this.EquippedGun.K2_AttachToComponent(this.GunLocation, undefined, UE.EAttachmentRule.SnapToTarget, UE.EAttachmentRule.SnapToTarget, UE.EAttachmentRule.SnapToTarget, true);
     }
 }
